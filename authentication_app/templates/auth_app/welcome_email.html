@@ -1,0 +1,14 @@
+{% autoescape off %}
+Hello {{ user.username }},
+
+Welcome to Kingdoms Authentication App! We're excited to have you on board.
+
+Your account has been successfully created. You can now log in using your credentials:
+- Username: {{ user.username }}
+- Email: {{ user.email }}
+
+If you have any questions or need assistance, please don't hesitate to contact us.
+
+Best regards,
+The Kingdoms Authentication App team
+{% endautoescape %} 

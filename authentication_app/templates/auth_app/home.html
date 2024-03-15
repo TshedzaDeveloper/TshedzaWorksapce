@@ -1,0 +1,21 @@
+{% extends 'auth_app/base.html' %}
+
+{% block title %}Home - Kingdoms Authentication App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to Kingdoms Authentication App</h2>
+    <p>A secure and modern authentication system built with Django.</p>
+    
+    {% if user.is_authenticated %}
+        <p>You are logged in as {{ user.username }}.</p>
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+    {% else %}
+        <p>Please login or register to access the dashboard.</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 

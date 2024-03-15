@@ -1,0 +1,50 @@
+{% extends 'auth_app/base.html' %}
+
+{% block title %}Login - Kingdoms Authentication App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Login</h2>
+    
+    {% if form.errors or messages %}
+        <div class="error-message" style="background-color: #f8d7da; color: #721c24; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            {% if form.errors %}
+                Please correct the errors below.
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #666; display: block; margin-top: 0.25rem;">{{ field.help_text }}</small>
+                {% endif %}
+                {% if field.errors %}
+                    <div style="color: var(--danger-color); margin-top: 0.25rem;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    
+    <div style="margin-top: 1rem;">
+        <p>
+            Don't have an account? <a href="{% url 'register' %}">Register here</a>
+        </p>
+        <p>
+            Forgot your password? <a href="{% url 'password_reset' %}">Reset it here</a>
+        </p>
+    </div>
+</div>
+{% endblock %} 

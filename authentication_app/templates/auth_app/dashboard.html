@@ -1,0 +1,23 @@
+{% extends 'auth_app/base.html' %}
+
+{% block title %}Dashboard - Kingdoms Authentication App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to your Dashboard, {{ user.username }}!</h2>
+    
+    <div style="margin-top: 2rem;">
+        <h3>Your Account Information</h3>
+        <div style="margin-top: 1rem;">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Last Login:</strong> {{ user.last_login|date:"F j, Y, g:i a" }}</p>
+            <p><strong>Date Joined:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+        </div>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+    </div>
+</div>
+{% endblock %} 

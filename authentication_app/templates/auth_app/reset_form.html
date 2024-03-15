@@ -1,0 +1,39 @@
+{% extends 'auth_app/base.html' %}
+
+{% block title %}Set New Password - Kingdoms Authentication App{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Set New Password</h2>
+    
+    {% if validlink %}
+        <p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small style="color: #666; display: block; margin-top: 0.25rem;">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                        <div style="color: var(--danger-color); margin-top: 0.25rem;">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit" class="btn btn-primary">Change Password</button>
+        </form>
+    {% else %}
+        <p>The password reset link was invalid, possibly because it has already been used. Please request a new password reset.</p>
+        <div style="margin-top: 1rem;">
+            <a href="{% url 'password_reset' %}" class="btn btn-primary">Request New Reset Link</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 
